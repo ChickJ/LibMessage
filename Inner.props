@@ -1,0 +1,5 @@
+<Project>
+    <PropertyGroup>
+        <TargetFrameworkSupportsTesting Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">true</TargetFrameworkSupportsTesting>
+    </PropertyGroup>
+</Project>

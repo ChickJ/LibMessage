@@ -1,0 +1,33 @@
+<Project>
+  <PropertyGroup>
+      <!-- Benign -->
+      <AssemblyName>libMessage</AssemblyName>
+      <AssemblyTitle>Messages</AssemblyTitle>
+      <Configuration>Debug</Configuration>
+      <OutputType>Library</OutputType>
+
+      <!-- Using an out of source build directory. -->
+      <!-- There is a bug in either `Sdk.props` or `Sdk.targets` when using
+           a custom build path that requires manual import. -->
+      <BaseIntermediateOutputPath>../.Build/$(AssemblyName)/obj/</BaseIntermediateOutputPath>
+      <BaseOutputPath>../.Build/$(AssemblyName)/bin/</BaseOutputPath>
+
+      <!-- These four break `Run Test` code lens, even though everything points to the same path. -->
+      <!-- Make sure and restart VSCode in between attempts. -->
+      <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+      <IntermediateOutputPath>$(BaseIntermediateOutputPath)/$(Configuration)/$(TargetFramework)/</IntermediateOutputPath>
+      <OutputPath>$(BaseOutputPath)/$(Configuration)/$(TargetFramework)/</OutputPath>
+      <OutDir>$(BaseOutputPath)/$(Configuration)/$(TargetFramework)/</OutDir>
+
+      <TargetFrameworks>netcoreapp2.0;netstandard2.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+      <PackageReference Include="xunit" Version="2.2.0" />
+      <PackageReference Condition=" '$(TargetFramework)' == 'netcoreapp2.0' " Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
+      <PackageReference Condition=" '$(TargetFramework)' == 'netcoreapp2.0' " Include="xunit.runner.visualstudio" Version="2.2.0" />
+  </ItemGroup>
+
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+</Project>

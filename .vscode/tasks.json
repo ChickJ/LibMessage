@@ -1,0 +1,67 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "taskName": "Build",
+            "type": "process",
+            "command": "msbuild",
+            "args": [
+                "-p:GenerateFullPaths=true,TargetFramework=netcoreapp2.0,IsPackable=false",
+                "-t:build",
+                "${workspaceRoot}/libMessage/libMessage.csproj"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "taskName": "Clean",
+            "type": "process",
+            "command": "msbuild",
+            "args": [
+                "-t:clean",
+                "${workspaceRoot}/libMessage/libMessage.csproj"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "taskName": "Rebuild",
+            "type": "process",
+            "command": "msbuild",
+            "args": [
+                "-p:GenerateFullPaths=true,TargetFramework=netcoreapp2.0,IsPackable=false",
+                "-t:rebuild",
+                "${workspaceRoot}/libMessage/libMessage.csproj"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "taskName": "Test",
+            "type": "process",
+            "command": "msbuild",
+            "args": [
+                "-p:GenerateFullPaths=true,TargetFramework=netcoreapp2.0,IsPackable=false,NoBuild=true",
+                "-t:vstest",
+                "${workspaceRoot}/libMessage/libMessage.csproj"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

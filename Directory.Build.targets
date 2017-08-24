@@ -1,0 +1,3 @@
+<Project>
+    <Import Project="Inner.targets" Condition=" '$(IsCrossTargetingBuild)' != 'true' " />
+</Project>

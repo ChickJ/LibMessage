@@ -1,0 +1,7 @@
+<Project>
+    <PropertyGroup>
+       <IsCrossTargetingBuild Condition=" '$(IsCrossTargetingBuild)' == '' and '$(TargetFrameworks)' != '' and '$(TargetFramework)' == ''" >true</IsCrossTargetingBuild>
+    </PropertyGroup>
+
+    <Import Project="Inner.props" Condition=" '$(IsCrossTargetingBuild)'!='true' " />
+</Project>

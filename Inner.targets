@@ -1,0 +1,29 @@
+<Project>
+  <!-- Replace Microsoft `VSTest` with ours.
+       Differences:
+           -  Test each $(UnitTestTargetFramework) instead of each $(TargetFramework).
+
+              Not all frameworks support unit test runner resulting in ugly
+              errors.
+
+           -  Never build before testing. -->
+  <Target Name="VSTest" Condition=" '$(TargetFrameworkSupportsTesting)' == 'true' " >
+    <CallTarget Targets="ShowCallOfVSTestTaskWithParameter" />
+
+    <Microsoft.TestPlatform.Build.Tasks.VSTestTask
+        TestFileFullPath="$(TargetPath)"
+        VSTestSetting="$(VSTestSetting)"
+        VSTestTestAdapterPath="$(VSTestTestAdapterPath)"
+        VSTestFramework="$(TargetFrameworkMoniker)"
+        VSTestPlatform="$(PlatformTarget)"
+        VSTestTestCaseFilter="$(VSTestTestCaseFilter)"
+        VSTestLogger="$(VSTestLogger)"
+        VSTestListTests="$(VSTestListTests)"
+        VSTestDiag="$(VSTestDiag)"
+        VSTestCLIRunSettings="$(VSTestCLIRunSettings)"
+        VSTestConsolePath="$(VSTestConsolePath)"
+        VSTestResultsDirectory="$(VSTestResultsDirectory)"
+        VSTestVerbosity="$(VSTestVerbosity)"
+        VSTestCollect="$(VSTestCollect)" />
+  </Target>
+</Project>
